@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {tokenizerService} from "./service";
+import {Model} from "./Model";
 
 
 @Component({
@@ -8,33 +9,60 @@ import {tokenizerService} from "./service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  paraphrases: any[] | undefined ;
-  constructor(private system: tokenizerService
-              ) {
+
+  constructor(private service: tokenizerService
+  ) {
   }
+
+  models: Model[] = [];
   title = 'Test';
-  uuid='fbdfjgdfkgvndf';
+  uuid = 'fbdfjgdfkgvndf';
   // option=['option1', 'option2 ', 'option3'];
-  selectedOption='option1';
+  selectedOption = 'option1';
   formModel: any = {};
+  paraphrases = {
+    "paraphrases": [
+      "nghỉ thai sản có được lương không"]
+  };
+  data = {
+    "bot_id": this.uuid,
+    "model": "phobert",
+    "doc": "nghỉ thai sản có được lương không"
+  };
 
 
-  options = [
-    { id: 1, name: 'option1' },
-    { id: 2, name: 'option2' },
-    { id: 3, name: 'option3' },
-    { id: 4, name: 'option4' },
-  ];
-  myTextarea= 'ok';
-
+  model = ['phobert', 'vispacy', 'fasttext'];
+  myTextarea = 'ok';
+  selectModel = 'phobert';
 
 
   train() {
 
     console.log('myTextarea : ', this.myTextarea);
+    this.service.train(this.paraphrases).subscribe({
+      next: (resp) => {
+        console.log('Body : ', resp.body);
+        this.uuid = resp.body.uuid;
+      }
+    });
+
+
   }
 
   search() {
+    console.log('uuid : ', this.uuid);
+    this.data.bot_id = this.uuid;
+    console.log('data.uuid : ', this.data.bot_id);
 
+    this.service.search(this.data).subscribe({
+      next: (resp) => {
+        console.log('Body : ', resp.body.json);
+        this.models = {...resp.body};
+        console.log('Body : ', this.models);
+        console.log('length : ',resp.body.length );
+      }
+    });
   }
+
+
 }
