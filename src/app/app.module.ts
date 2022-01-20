@@ -9,10 +9,16 @@ import {NgSelectModule} from "@ng-select/ng-select";
 import {HttpClientModule} from "@angular/common/http";
 import {GlobalConfig, ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { SentenceSimilarityComponent } from './test/sentence-similarity/sentence-similarity.component';
+import { TrainSearchComponent } from './test/train-search/train-search.component';
+import { HomeComponent } from './home/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SentenceSimilarityComponent,
+    TrainSearchComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
