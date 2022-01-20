@@ -11,7 +11,8 @@ const routes: Routes = [
     ]
   },
   {path:"test", component:TrainSearchComponent},
-  {path:"test2", component:SentenceSimilarityComponent}
+  {path:"test2", component:SentenceSimilarityComponent},
+  {path: '**', component: HomeComponent}
 ];
 
 @NgModule({

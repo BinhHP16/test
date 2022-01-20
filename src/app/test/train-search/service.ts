@@ -25,6 +25,9 @@ export class tokenizerService {
     return this.http.post<HttpResponse<any>>(API_PATH + '/api/v1/annoy-search',data, {observe: 'response'});
   }
 
+  getAllTestCase(): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(API_PATH + '/api/v1/annoy-indexs', {observe: 'response'});
+  }
 }
 
 

@@ -9,6 +9,7 @@ export class SentenceSimilarityComponent implements OnInit {
 
   constructor() { }
 
+  cars=['car1', 'car2', 'car3'];
   ngOnInit(): void {
   }
 

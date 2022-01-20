@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {tokenizerService} from "./service";
+import {tokenizerService} from "./test/train-search/service";
 import {Model} from "./Model";
 import {NgSelectConfig} from "@ng-select/ng-select";
 import {ToastrService} from "ngx-toastr";

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {tokenizerService} from "../../service";
+import {tokenizerService} from "./service";
 import {NgSelectConfig} from "@ng-select/ng-select";
 import {ToastrService} from "ngx-toastr";
 import {Model} from "../../Model";
@@ -28,6 +28,7 @@ export class TrainSearchComponent implements OnInit {
   models: Model[] = [];
 
   uuid = '';
+
   // option=['option1', 'option2 ', 'option3'];
   // selectedOption = 'option1';
   formModel: any = {};
@@ -44,14 +45,24 @@ export class TrainSearchComponent implements OnInit {
   model = ['phobert', 'vispacy', 'fasttext'];
 
   myTextarea = '';
-
+  ngOnInit(): void {
+  //   this.service.getAllTestCase().subscribe((resp) => {
+  //     if (!resp || !resp.body) {
+  //       this.systemList = [];
+  //       return;
+  //     }
+  //
+  //     this.systemList = [...resp.body];
+  //   });
+  // }
+  }
 
   train() {
     const arr = this.myTextarea.split(/\n/);
     console.log('myTextarea : ', this.myTextarea);
     console.log('++++++++++++++++++++++++++++++++++++++++++++++');
     console.log('arrText : ', this.arrText);
-    this.service.train({paraphrases: arr}).subscribe(
+    this.service.train({bot_name: "Chế độ chính sách",paraphrases: arr}).subscribe(
 
       (resp) => {
 
@@ -74,16 +85,19 @@ export class TrainSearchComponent implements OnInit {
     console.log('doc : ', this.question);
 
     this.service.search({
-      bot_id: this.uuid,
+      bot_name: "thong_tin_cong_ty",
       model: this.selectModel,
       doc: this.question
-    }).subscribe({
-      next: (resp) => {
+    }).subscribe(
+      (resp) => {
         this.models = resp.body;
         console.log('Body : ', this.models);
         console.log('length : ', resp.body.length);
+        this.toast.success('success');
+      },(error )=>{
+        this.toast.error('error');
       }
-    });
+    );
   }
 
 
@@ -101,6 +115,5 @@ export class TrainSearchComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
+
 }
