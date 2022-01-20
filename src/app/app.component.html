@@ -369,7 +369,7 @@
                       id="txtComment" rows="5" [ngModelOptions]="{standalone: true}" cols="20" style="width:100%; min-height:250px "></textarea>
             <br>
 
-<!--            <span>{{myTextarea}}</span>-->
+            <!--            <span>{{myTextarea}}</span>-->
 
             <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="train()">Train</button>
             <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="test()">Test</button>
@@ -392,26 +392,26 @@
                  placeholder=" Câu hỏi" [ngModel]="question" (ngModelChange)="question = $event" [ngModelOptions]="{standalone: true}">
           <span class="m-2 col-sm-3">
 <!--            <span>{{question}}</span>-->
-<!--            <select [(ngModel)]="selectModel" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectModel = $event">-->
-<!--              <option *ngFor="let x of model" (change)="onChange()">{{x}}</option>-->
+            <!--            <select [(ngModel)]="selectModel" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectModel = $event">-->
+            <!--              <option *ngFor="let x of model" (change)="onChange()">{{x}}</option>-->
 
-<!--            </select>-->
+            <!--            </select>-->
             <ng-select [items]="model" (change)="onChange($event)" [searchable]="false" [clearable]="false"
                        [(ngModel)]="selectModel">
 
 </ng-select>
-<!--             <ng-select [items]="cars" (change)="onChange($event)" [searchable]="false" [clearable]="false"-->
-<!--                        bindLabel="name"-->
-<!--                        bindValue="id"-->
-<!--                        [(ngModel)]="selectModel" class="auto-grow">-->
-<!--                    </ng-select>-->
+            <!--             <ng-select [items]="cars" (change)="onChange($event)" [searchable]="false" [clearable]="false"-->
+            <!--                        bindLabel="name"-->
+            <!--                        bindValue="id"-->
+            <!--                        [(ngModel)]="selectModel" class="auto-grow">-->
+            <!--                    </ng-select>-->
             <h1>{{selectModel}}</h1>
 
 
       </span>
 
           <button type="button" class="btn btn-secondary mt-3 col-sm-2" (click)="search()">Tìm</button>
-<!--          <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="clearSearch()">Clear Search</button>-->
+          <!--          <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="clearSearch()">Clear Search</button>-->
 
         </div>
       </div>

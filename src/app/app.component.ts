@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {tokenizerService} from "./service";
 import {Model} from "./Model";
 import {NgSelectConfig} from "@ng-select/ng-select";
-import {ToastrService} from "ngx-toastr";
+
 
 
 
@@ -14,8 +14,7 @@ import {ToastrService} from "ngx-toastr";
 export class AppComponent {
 
   constructor(private service: tokenizerService,
-              private config: NgSelectConfig,
-              private toast: ToastrService,
+              private config: NgSelectConfig
 
   ) {
     this.config.notFoundText = 'Custom not found';
@@ -57,15 +56,15 @@ export class AppComponent {
 
       (resp) => {
 
-          console.log('Body : ', resp.body);
-          this.uuid = resp.body.uuid;
-          this.toast.success('success');
+        console.log('Body : ', resp.body);
+        this.uuid = resp.body.uuid;
+        // this.toast.success('success');
 
 
-          this.toast.error('error');
+
 
       },(err)=>{
-        this.toast.error('error');
+        // this.toast.error('error');
       }
     );
 
@@ -117,6 +116,6 @@ export class AppComponent {
 
 
   test() {
-    this.toast.success("Hello, I'm the toastr message.")
+    // this.toast.success("Hello, I'm the toastr message.")
   }
 }
