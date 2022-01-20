@@ -365,12 +365,14 @@
 
           <div class="form-group row ">
             <h1 class="col-sm-12 text-left">Dữ liệu huấn luyện </h1>
-            <textarea class="col-sm-12 " [ngModel]="myTextarea" (ngModelChange)="myTextarea = $event" name="txtComment"
-                      id="txtComment" rows="5" cols="20" style="width:100%; min-height:250px "></textarea>
+            <textarea class="col-sm-12 " [ngModel]="myTextarea" (ngModelChange)="myTextarea = $event" name="txtComment" placeholder="Input"
+                      id="txtComment" rows="5" [ngModelOptions]="{standalone: true}" cols="20" style="width:100%; min-height:250px "></textarea>
             <br>
 
+<!--            <span>{{myTextarea}}</span>-->
 
             <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="train()">Train</button>
+            <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="test()">Test</button>
 
             <div></div>
             <h4 class="col-sm-7 ">
@@ -387,48 +389,59 @@
         <div class="md-form form-group mt-5 text-center form-group row">
           <h1 class="col-sm-12 text-left">Câu hỏi </h1>
           <input mdbInput type="text" class="form-control col-sm-8 border-secondary " id="question"
-                 placeholder=" Câu hỏi">
+                 placeholder=" Câu hỏi" [ngModel]="question" (ngModelChange)="question = $event" [ngModelOptions]="{standalone: true}">
           <span class="m-2 col-sm-3">
-            <select [(ngModel)]="selectModel" (ngModelChange)="selectModel = $event">
-              <option *ngFor="let x of model">{{x}}</option>
+<!--            <span>{{question}}</span>-->
+<!--            <select [(ngModel)]="selectModel" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectModel = $event">-->
+<!--              <option *ngFor="let x of model" (change)="onChange()">{{x}}</option>-->
 
-            </select>
+<!--            </select>-->
+            <ng-select [items]="model" (change)="onChange($event)" [searchable]="false" [clearable]="false"
+                       [(ngModel)]="selectModel">
+
+</ng-select>
+<!--             <ng-select [items]="cars" (change)="onChange($event)" [searchable]="false" [clearable]="false"-->
+<!--                        bindLabel="name"-->
+<!--                        bindValue="id"-->
+<!--                        [(ngModel)]="selectModel" class="auto-grow">-->
+<!--                    </ng-select>-->
             <h1>{{selectModel}}</h1>
-            <!--             <ng-select [items]="model" (click)="onClick()" [searchable]="false" [clearable]="false"-->
-            <!--                        [(ngModel)]="selectModel" class="auto-grow">-->
-            <!--                    </ng-select>-->
 
 
       </span>
 
           <button type="button" class="btn btn-secondary mt-3 col-sm-2" (click)="search()">Tìm</button>
+<!--          <button type="button" class="btn btn-secondary mt-3 mr-2 col-sm-2 " (click)="clearSearch()">Clear Search</button>-->
 
         </div>
       </div>
 
 
-<!--            <div class="form-group row">-->
-<!--              <label  class="col-sm-6 col-form-label required border-secondary border border-primary" >Câu trả lời</label>-->
-<!--              <label  class="col-sm-6 col-form-label required border-secondary border border-primary" >Độ chính xác</label>-->
-<!--      &lt;!&ndash;        <div  class="col-sm-6 col-form-label required border-secondary border border-primary"*ngFor="let item of models">{{item.distance}}</div>&ndash;&gt;-->
+      <!--            <div class="form-group row">-->
+      <!--              <label  class="col-sm-6 col-form-label required border-secondary border border-primary" >Câu trả lời</label>-->
+      <!--              <label  class="col-sm-6 col-form-label required border-secondary border border-primary" >Độ chính xác</label>-->
+      <!--      &lt;!&ndash;        <div  class="col-sm-6 col-form-label required border-secondary border border-primary"*ngFor="let item of models">{{item.distance}}</div>&ndash;&gt;-->
 
-<!--      &lt;!&ndash;        <div  class="col-sm-6 col-form-label required border-secondary border border-primary" style="min-height: 80px" *ngFor="let item of models">{{item.doc}}</div>&ndash;&gt;-->
-<!--            </div>-->
+      <!--      &lt;!&ndash;        <div  class="col-sm-6 col-form-label required border-secondary border border-primary" style="min-height: 80px" *ngFor="let item of models">{{item.doc}}</div>&ndash;&gt;-->
+      <!--            </div>-->
 
 
+
+    </form>
+    <div class="col-sm-12 p-0">
       <div class="my-card-body">
         <table class="table my-table">
           <thead class="table-header">
           <tr>
-            <th class="col-sm-6 col-form-label required border-secondary border border-primary">Câu trả lời</th>
+            <th class=" col-sm-6 col-form-label required border-secondary border border-primary">Câu trả lời</th>
             <th class="col-sm-6 col-form-label required border-secondary border border-primary">Độ chính xác</th>
 
           </tr>
           </thead>
           <tbody>
-          <tr class="ng-star-inserted" *ngFor="let item of models">
-            <td class="col-sm-6 col-form-label required border-secondary border border-primary">{{item.distance}}</td>
-            <td class="col-sm-6 col-form-label required border-secondary border border-primary">{{item.doc}}</td>
+          <tr class="ng-star-inserted" *ngFor="let data of models">
+            <td class="col-sm-6 col-form-label required border-secondary border border-primary">{{data.doc}}</td>
+            <td class="col-sm-6 col-form-label required border-secondary border border-primary">{{data.distance}} </td>
 
 
           </tr>
@@ -436,9 +449,8 @@
         </table>
 
       </div>
-    </form>
+    </div>
   </div>
-
 
 </div>
 
