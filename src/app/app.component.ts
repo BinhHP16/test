@@ -6,6 +6,7 @@ import {ToastrService} from "ngx-toastr";
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +16,7 @@ export class AppComponent {
 
   constructor(private service: tokenizerService,
               private config: NgSelectConfig,
-              private toast: ToastrService,
+              private toast: ToastrService
 
   ) {
     this.config.notFoundText = 'Custom not found';
@@ -61,28 +62,10 @@ export class AppComponent {
           this.uuid = resp.body.uuid;
           this.toast.success('success');
 
-
-          this.toast.error('error');
-
-      },(err)=>{
+      },(error )=>{
         this.toast.error('error');
       }
     );
-
-
-    //
-    // this.systemAlarm.save(this.formModel).subscribe((resp) => {
-    //   this.toast.success('Alarm saved');
-    //   this.router.navigate(['/system-monitoring/system/' + this.systemId + '/system-alarm']);
-    // }, (err) => {
-    //   if (err && err.status === 409 && err.error && err.error.apierror && err.error.apierror.subErrors) {
-    //     const duplicatedColumns = err.error.apierror.subErrors[0].duplicatedColumns;
-    //     focusDuplicatedFields(duplicatedColumns, this.formModelCheck);
-    //   } else {
-    //     this.toast.error('Dupplicated Alarm !!!', '', {timeOut: 10000} as Partial<GlobalConfig>);
-    //   }
-    // });
-
 
   }
 
@@ -118,5 +101,6 @@ export class AppComponent {
 
   test() {
     this.toast.success("Hello, I'm the toastr message.")
+
   }
 }
