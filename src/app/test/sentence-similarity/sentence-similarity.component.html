@@ -292,29 +292,126 @@
 <!--    }-->
 <!--  }-->
 <!--</style>-->
-<div class="content text-center" role="main">
+<div class="content text-center " role="main">
   <div class="row text-center m-5 " style="height:700px">
 
-    <div class="col-2  border border-primary" style="height: 100%">
+    <div class="col-2 " style="height: 100%">
 
-
-      <h4 class=" m-2  p-0"> <span class="col-9">Bộ kiểm thử</span>  <span class="col-3">+</span></h4>
-
-        <table class="table ">
-
+      <!--List kiểm thử-->
+      <h4 class=" m-2  p-0"><span class="col-9 ">Bộ kiểm thử</span> <span class="col-3 text-right">
+        <button href="" class=" glyphicon" data-toggle="modal"
+           data-target="#modalLoginForm">+</button>
+      </span></h4>
+      <table class="table ">
+        <tbody>
+        <tr class="ng-star-inserted" *ngFor="let item of modelList">
+          <td class="col-sm-6 col-form-label text-left p-0">
+            <button class="btn btn-light col-12 text-left" (click)="onclickItem(item)">{{item}}</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--    Câu mẫu-->
+    <div class="col-5 text-left">
+      <div class="mb-3"><h4 class=" m-2  p-0"><span
+        class="col-9 ">Câu mẫu({{listSentences.length}})</span></h4>
+        <table class="table table-sm" style="height: 100%; width:auto">
           <tbody>
-          <tr class="ng-star-inserted" *ngFor="let item of cars" >
-            <td class="col-sm-6 col-form-label "><a href="">{{item}}</a></td>
+          <tr class="ng-star-inserted text-left" *ngFor="let item of listSentences">
+            <td class="col-sm-6 col-form-label  ">{{item}}</td>
           </tr>
           </tbody>
         </table>
+      </div>
+
     </div>
-    <div class="col-7 text-left" style="height: 100%">
-      <div class="  border border-primary  mb-3" style="height: 47%; width:100%">Test</div>
-      <div class="  border border-primary mb-0 " style="height: 50%; width:100%">Test2</div>
+    <div class="col-5 text-left">
+      <!-- Test kiểm thử     -->
+      <div class="   mb-0 " style="height: 60%; width:100%">
+        <div>
+          <h4 class=" m-2  p-0"><span class="col-7 ">Kiểm thử</span></h4>
+          <div class="row m-3">
+            <input mdbInput type="text" class="form-control col-sm-6 border-secondary " id="question" placeholder="Test"
+                   [ngModel]="question" (ngModelChange)="question = $event" [ngModelOptions]="{standalone: true}">
+            <div class="col-sm-2 p-0 ml-2">
+              <ng-select class="ml-2 " style="height:100%"  [items]="model" (change)="onChange($event)" [searchable]="false"
+                         [clearable]="false" placeholder="phobert"
+                         [(ngModel)]="selectModel">
+              </ng-select>
+            </div>
+
+            <div class="col-sm-3">
+              <button type="button" class="btn btn-secondary col-9  ml-2" (click)="onSearch()">Tìm</button>
+            </div>
+
+          </div>
+
+          <div class="my-card-body">
+            <table class="table my-table">
+              <thead class="table-header">
+              <tr>
+                <th class=" col-sm-6 col-form-label  ">Câu trả lời</th>
+                <th class="col-sm-6 col-form-label  ">Độ chính xác</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="ng-star-inserted" *ngFor="let data of models">
+                <td class="col-sm-6 col-form-label">{{data.doc}}</td>
+                <td class="col-sm-6 col-form-label ">{{data.distance}} </td>
+
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
 
     </div>
 
   </div>
-<p>sentence-similarity works!</p>
+</div>
+<!--Modal-->
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Tạo bộ kiểm thử</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="defaultForm-email"><b>Tên:</b></label>
+          <input type="email" id="defaultForm-email" class="border border-secondary form-control validate"
+                 [ngModel]="bot_name_input" (ngModelChange)="bot_name_input = $event"
+                 [ngModelOptions]="{standalone: true}">
+
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <!--          <input type="password" id="defaultForm-pass" class="form-control validate">-->
+          <label data-error="wrong" data-success="right" for="textArea"><b>Bộ dữ liệu</b></label>
+          <textarea class="col-sm-12 " name="txtComment" placeholder="Input" [ngModel]="myTextarea"
+                    (ngModelChange)="myTextarea = $event"
+                    [ngModelOptions]="{standalone: true}" id="textArea" rows="5" cols="20"
+                    style="width:100%; min-height:200px "></textarea>
+          <br>
+
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary col-3" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary col-3" (click)="onCreate()">Tạo</button>
+      </div>
+    </div>
+  </div>
 </div>
